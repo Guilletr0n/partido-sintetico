@@ -1,0 +1,76 @@
+---
+import ShowcaseLayout from '../layouts/ShowcaseLayout.astro';
+import { componentSpecs } from '@repo/design-system/specs';
+import { tokens } from '@repo/design-system/tokens';
+
+const specList = Object.values(componentSpecs);
+---
+
+<ShowcaseLayout title="Overview & Specifications">
+  <div class="max-w-5xl space-y-8">
+    <div>
+      <h1 class="text-3xl font-extrabold text-white">Design System Specifications & Workbench</h1>
+      <p class="text-slate-400 mt-2 text-base">
+        Isolated preview environment operating independently of the main CMS application. Built from visual token definitions provided by the <code class="text-blue-400 bg-slate-800 px-1.5 py-0.5 rounded">design-spec-agent</code>.
+      </p>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <div class="bg-slate-800/80 border border-slate-700 p-6 rounded-xl">
+        <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Design Tokens</div>
+        <div class="text-3xl font-extrabold text-blue-400 mt-2">{Object.keys(tokens.colors).length} Colors</div>
+        <div class="text-xs text-slate-400 mt-1">Palette scales & themes</div>
+      </div>
+      <div class="bg-slate-800/80 border border-slate-700 p-6 rounded-xl">
+        <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider">UI Components</div>
+        <div class="text-3xl font-extrabold text-emerald-400 mt-2">{specList.length} Components</div>
+        <div class="text-xs text-slate-400 mt-1">Atoms, Molecules, Organisms</div>
+      </div>
+      <div class="bg-slate-800/80 border border-slate-700 p-6 rounded-xl">
+        <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Showcase URL</div>
+        <div class="text-2xl font-mono text-purple-300 mt-2">port 4322</div>
+        <div class="text-xs text-slate-400 mt-1">http://localhost:4322</div>
+      </div>
+    </div>
+
+    <!-- Component Spec Registry Table -->
+    <div class="bg-slate-800/60 border border-slate-700 rounded-xl overflow-hidden">
+      <div class="px-6 py-4 border-b border-slate-700 flex justify-between items-center">
+        <h2 class="text-lg font-bold text-white">Component Specification Registry</h2>
+        <span class="text-xs text-slate-400">Maintained by Design Spec Agent</span>
+      </div>
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-slate-950/60 text-slate-400 text-xs uppercase tracking-wider border-b border-slate-700">
+            <th class="py-3 px-6">Component</th>
+            <th class="py-3 px-6">Category</th>
+            <th class="py-3 px-6">Description</th>
+            <th class="py-3 px-6 text-right">Workbench</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-700/60 text-sm">
+          {specList.map((spec) => (
+            <tr class="hover:bg-slate-800/40 transition-colors">
+              <td class="py-4 px-6 font-mono font-bold text-blue-400">{spec.name}</td>
+              <td class="py-4 px-6">
+                <span class="inline-block px-2.5 py-0.5 text-xs font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-800/60 rounded-full uppercase">
+                  {spec.category}
+                </span>
+              </td>
+              <td class="py-4 px-6 text-slate-300">{spec.description}</td>
+              <td class="py-4 px-6 text-right">
+                <a
+                  href={`/components/${spec.name}`}
+                  class="inline-flex items-center px-3 py-1 text-xs font-medium text-white bg-blue-600 hover:bg-blue-500 rounded-md transition-colors"
+                >
+                  Preview &rarr;
+                </a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ShowcaseLayout>

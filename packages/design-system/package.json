@@ -1,0 +1,24 @@
+{
+  "name": "@repo/design-system",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./tokens": "./src/tokens/index.ts",
+    "./specs": "./src/specs/index.ts",
+    "./components/*": "./src/components/*.astro"
+  },
+  "scripts": {
+    "build": "astro check",
+    "check": "astro check"
+  },
+  "peerDependencies": {
+    "astro": "^4.0.0 || ^5.0.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.8.0",
+    "astro": "^4.15.0",
+    "typescript": "^5.4.0"
+  }
+}

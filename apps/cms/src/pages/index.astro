@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '@repo/design-system/components/Hero.astro';
+import Card from '@repo/design-system/components/Card.astro';
+
+const posts = await getCollection('posts', ({ data }) => !data.draft);
+posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout title="Inicio" description="CMS del Partido Sintético Español">
+  <Hero
+    title="Democracia Sintética e Inteligencia Colectiva"
+    description="Un ecosistema modular impulsado por agentes de IA y gobernanza basada en evidencia objetiva."
+    ctaText="Leer Manifiesto"
+    ctaHref="/posts/manifiesto-sintetico"
+  />
+
+  <section id="propuestas" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="mb-10 text-center">
+      <h2 class="text-3xl font-extrabold text-zinc-100">Últimas Publicaciones & Propuestas</h2>
+      <p class="mt-2 text-zinc-400">Contenido administrado vía la capa de datos CMS.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {posts.map((post) => (
+        <Card
+          title={post.data.title}
+          subtitle={post.data.description}
+          tag={post.data.tag}
+          href={`/posts/${post.slug}`}
+        >
+          <p class="text-xs text-zinc-400 mt-2">
+            Por <strong class="text-zinc-200">{post.data.author}</strong> • {post.data.pubDate.toLocaleDateString('es-ES')}
+          </p>
+        </Card>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,46 @@
+---
+import Button from './Button.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  ctaText?: string;
+  ctaHref?: string;
+  badgeText?: string;
+}
+
+const { title, description, ctaText = 'Get Started', ctaHref = '#', badgeText = 'Engineering Platform & AI Framework' } = Astro.props;
+---
+
+<section class="relative bg-zinc-950 text-white py-24 px-4 sm:px-6 text-center border-b border-zinc-900 overflow-hidden">
+  <!-- Subtle Background Radial Gradient Glow -->
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-950/40 via-zinc-950 to-zinc-950 pointer-events-none"></div>
+
+  <div class="relative max-w-4xl mx-auto space-y-6">
+    {badgeText && (
+      <div class="inline-flex items-center space-x-2 bg-zinc-900/80 border border-zinc-800 rounded-full px-3.5 py-1 text-xs text-zinc-300">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>{badgeText}</span>
+      </div>
+    )}
+
+    <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-zinc-100 leading-tight">
+      {title}
+    </h1>
+
+    <p class="text-lg sm:text-xl text-zinc-400 max-w-2xl mx-auto leading-relaxed">
+      {description}
+    </p>
+
+    {ctaText && (
+      <div class="pt-4 flex justify-center space-x-4">
+        <Button href={ctaHref} variant="primary" size="lg">
+          {ctaText}
+        </Button>
+        <Button href="#docs" variant="outline" size="lg">
+          View Documentation
+        </Button>
+      </div>
+    )}
+  </div>
+</section>

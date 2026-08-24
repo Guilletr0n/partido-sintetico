@@ -1,0 +1,15 @@
+# Node & Bun dependencies
+node_modules/
+.bun/
+
+# Build outputs & caches
+dist/
+.astro/
+.output/
+*.log
+
+# Environment & local OS files
+.env
+.env.local
+.DS_Store
+Thumbs.db

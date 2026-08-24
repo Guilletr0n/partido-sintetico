@@ -1,0 +1,36 @@
+---
+export interface Props {
+  variant?: 'primary' | 'secondary' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  className?: string;
+}
+
+const { variant = 'primary', size = 'md', href, className = '' } = Astro.props;
+
+const baseStyles = "inline-flex items-center justify-center font-medium rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-950";
+const variantStyles = {
+  primary: "bg-emerald-500 text-zinc-950 hover:bg-emerald-400 font-semibold focus:ring-emerald-400 shadow-sm shadow-emerald-950/50",
+  secondary: "bg-zinc-100 text-zinc-950 hover:bg-white font-semibold focus:ring-zinc-300",
+  outline: "border border-zinc-800 bg-zinc-900/60 text-zinc-200 hover:bg-zinc-800 hover:text-white hover:border-zinc-700 focus:ring-zinc-600",
+};
+const sizeStyles = {
+  sm: "px-3 py-1.5 text-xs",
+  md: "px-4 py-2 text-sm",
+  lg: "px-6 py-2.5 text-base font-semibold",
+};
+
+const combinedClass = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;
+---
+
+{
+  href ? (
+    <a href={href} class={combinedClass}>
+      <slot />
+    </a>
+  ) : (
+    <button class={combinedClass}>
+      <slot />
+    </button>
+  )
+}

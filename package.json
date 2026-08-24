@@ -1,0 +1,20 @@
+{
+  "name": "partido-sintetico-monorepo",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "bun run --cwd apps/cms dev",
+    "dev:cms": "bun run --cwd apps/cms dev",
+    "dev:docs": "bun run --cwd apps/design-system-docs dev",
+    "build": "bun run --cwd packages/design-system build && bun run --cwd apps/cms build && bun run --cwd apps/design-system-docs build",
+    "check": "bun run --cwd packages/design-system check && bun run --cwd apps/cms check && bun run --cwd apps/design-system-docs check",
+    "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules bun.lock"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "typescript": "^5.4.0"
+  }
+}

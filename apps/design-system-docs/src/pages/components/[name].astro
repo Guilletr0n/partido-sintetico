@@ -1,0 +1,133 @@
+---
+import ShowcaseLayout from '../../layouts/ShowcaseLayout.astro';
+import { componentSpecs } from '@repo/design-system/specs';
+import Button from '@repo/design-system/components/Button.astro';
+import Card from '@repo/design-system/components/Card.astro';
+import Header from '@repo/design-system/components/Header.astro';
+import Footer from '@repo/design-system/components/Footer.astro';
+import Hero from '@repo/design-system/components/Hero.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { name: 'Button' } },
+    { params: { name: 'Card' } },
+    { params: { name: 'Header' } },
+    { params: { name: 'Footer' } },
+    { params: { name: 'Hero' } },
+  ];
+}
+
+const { name } = Astro.params;
+const spec = componentSpecs[name];
+---
+
+<ShowcaseLayout title={`${name} Component Workbench`}>
+  <div class="max-w-5xl space-y-10">
+    <div class="flex items-center justify-between border-b border-slate-800 pb-6">
+      <div>
+        <div class="flex items-center space-x-3">
+          <span class="px-2.5 py-0.5 text-xs font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-800/60 rounded-full uppercase">
+            {spec.category}
+          </span>
+          <h1 class="text-3xl font-extrabold text-white font-mono">{name} Component</h1>
+        </div>
+        <p class="text-slate-400 mt-2">{spec.description}</p>
+      </div>
+      <a href="/" class="text-xs text-blue-400 hover:text-blue-300 font-mono font-semibold">
+        &larr; Back to Specs
+      </a>
+    </div>
+
+    <!-- Live Component Preview Workbench -->
+    <section class="space-y-4">
+      <h2 class="text-xl font-bold text-white">Live Component Canvas</h2>
+      <div class="bg-slate-950 border border-slate-800 rounded-xl p-8 min-h-[220px] flex items-center justify-center relative overflow-hidden">
+        {name === 'Button' && (
+          <div class="flex flex-wrap gap-4 items-center justify-center">
+            <Button variant="primary">Primary Button</Button>
+            <Button variant="secondary">Secondary Button</Button>
+            <Button variant="outline">Outline Button</Button>
+            <Button variant="primary" size="sm">Small</Button>
+            <Button variant="primary" size="lg">Large</Button>
+          </div>
+        )}
+
+        {name === 'Card' && (
+          <div class="w-full max-w-md">
+            <Card
+              title="Gobernanza Sintética"
+              subtitle="Ejemplo de tarjeta preview visual aislada."
+              tag="Component Spec"
+              href="#"
+            >
+              <p class="text-xs text-slate-500">Rendered in isolated preview canvas on port 4322.</p>
+            </Card>
+          </div>
+        )}
+
+        {name === 'Hero' && (
+          <div class="w-full">
+            <Hero
+              title="Democracia Sintética e Inteligencia Colectiva"
+              description="Visualización del componente Hero en el workbench aislado."
+              ctaText="Explorar Componente"
+              ctaHref="#"
+            />
+          </div>
+        )}
+
+        {name === 'Header' && (
+          <div class="w-full">
+            <Header
+              siteTitle="Partido Sintético Español (Showcase Preview)"
+              navItems={[
+                { label: 'Inicio', href: '#' },
+                { label: 'Propuestas', href: '#' },
+              ]}
+            />
+          </div>
+        )}
+
+        {name === 'Footer' && (
+          <div class="w-full">
+            <Footer copyright="© 2026 Partido Sintético Español • Component Visual Preview" />
+          </div>
+        )}
+      </div>
+    </section>
+
+    <!-- Visual Specifications Table -->
+    <section class="space-y-4">
+      <h2 class="text-xl font-bold text-white">Variant Specifications</h2>
+      <div class="bg-slate-800/80 border border-slate-700 rounded-xl overflow-hidden divide-y divide-slate-700">
+        {Object.entries(spec.variants).map(([vName, vSpec]) => (
+          <div class="p-6 space-y-3">
+            <div class="flex items-center space-x-3">
+              <span class="font-mono text-sm font-bold text-blue-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-700">
+                {vName}
+              </span>
+              <span class="text-sm text-slate-300">{vSpec.description}</span>
+            </div>
+            <div class="bg-slate-950 p-4 rounded-lg font-mono text-xs text-slate-400 space-y-1">
+              {Object.entries(vSpec.tokenUsage).map(([tokenKey, tokenVal]) => (
+                <div><span class="text-purple-400">{tokenKey}</span>: <span class="text-emerald-300">{tokenVal}</span></div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Accessibility Notes if present -->
+    {spec.accessibilityNotes && (
+      <section class="space-y-4">
+        <h2 class="text-xl font-bold text-white">Accessibility (a11y) Notes</h2>
+        <ul class="bg-slate-800/60 border border-slate-700 rounded-xl p-6 space-y-2 list-disc list-inside text-sm text-slate-300">
+          {spec.accessibilityNotes.map((note) => (
+            <li>{note}</li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </div>
+</ShowcaseLayout>
