@@ -1,3 +1,8 @@
+---
+trigger: model_decision
+description: When the task in related with the design system or the site styles
+---
+
 # Design System Rules & Guidelines
 
 When working in `packages/design-system/`:

@@ -1,3 +1,8 @@
+---
+trigger: model_decision
+description: When the task is detached from site implementation and related only to the design system
+---
+
 # Visual Design Specification Rules & Guidelines
 
 When working on design specifications in `packages/design-system/src/tokens/` and `packages/design-system/src/specs/`:

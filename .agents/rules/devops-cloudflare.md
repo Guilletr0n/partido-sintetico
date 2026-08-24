@@ -1,4 +1,11 @@
+---
+trigger: model_decision
+description: When the task is related to deployments o cloudflare
+---
+
 # DevOps & Cloudflare Deployment Rules
+
+Find manuals about deploying an astro site in "https://developers.cloudflare.com/pages/framework-guides/deploy-an-astro-site/"
 
 When configuring deployments or infrastructure in `apps/cms` or `apps/design-system-docs`:
 
@@ -12,3 +19,4 @@ When configuring deployments or infrastructure in `apps/cms` or `apps/design-sys
    - Place Wrangler configuration (`wrangler.json` / `wrangler.toml`) in application roots when deploying via Wrangler CLI.
 4. **Pre-deployment Check**:
    - Always run `bun run check` and `bun run build` before pushing or deploying to production.
+

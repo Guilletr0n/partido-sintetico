@@ -16,5 +16,9 @@
   "devDependencies": {
     "esbuild": "^0.28.2",
     "typescript": "^5.4.0"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^14.2.4",
+    "wrangler": "^4.125.0"
   }
 }
