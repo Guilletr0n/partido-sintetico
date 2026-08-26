@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '@repo/design-system/components/Hero.astro';
 import Card from '@repo/design-system/components/Card.astro';
+import SectionTitle from '@repo/design-system/components/SectionTitle.astro';
 
 const posts = await getCollection('posts', ({ data }) => !data.draft);
 posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
@@ -10,16 +11,23 @@ posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 <BaseLayout title="Inicio" description="CMS del Partido Sintético Español">
   <Hero
-    title="Democracia Sintética e Inteligencia Colectiva"
-    description="Un ecosistema modular impulsado por agentes de IA y gobernanza basada en evidencia objetiva."
-    ctaText="Leer Manifiesto"
-    ctaHref="/posts/manifiesto-sintetico"
+    title="La evidencia como base de la democracia"
+    description="Usamos la inteligencia artificial para evaluar las políticas públicas con evidencia y transparencia. La IA informa y simula; la ciudadanía decide."
+    ctaText="CONOCE LOS PRINCIPIOS"
+    ctaHref="/posts/principios-fundacionales"
+    badgeText="GOBERNANZA BASADA EN EVIDENCIA"
   />
 
-  <section id="propuestas" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <div class="mb-10 text-center">
-      <h2 class="text-3xl font-extrabold text-zinc-100">Últimas Publicaciones & Propuestas</h2>
-      <p class="mt-2 text-zinc-400">Contenido administrado vía la capa de datos CMS.</p>
+  <section id="propuestas" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="mb-12 border-b-2 border-zinc-800 pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <SectionTitle
+        kicker="REGISTRO DE PROPUESTAS"
+        title="ÚLTIMAS PUBLICACIONES & PROPUESTAS"
+        id="publicaciones"
+      />
+      <span class="text-xs font-mono text-zinc-500 uppercase tracking-widest">
+        // TOTAL: {posts.length} ARTÍCULOS AUDITADOS
+      </span>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -30,9 +38,12 @@ posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
           tag={post.data.tag}
           href={`/posts/${post.slug}`}
         >
-          <p class="text-xs text-zinc-400 mt-2">
-            Por <strong class="text-zinc-200">{post.data.author}</strong> • {post.data.pubDate.toLocaleDateString('es-ES')}
-          </p>
+          <div class="mt-4 pt-3 border-t border-zinc-900 text-xs font-mono text-zinc-400 flex items-center justify-between">
+            <span>
+              AUTOR: <strong class="text-white">{post.data.author}</strong>
+            </span>
+            <span class="text-zinc-500">{post.data.pubDate.toLocaleDateString('es-ES')}</span>
+          </div>
         </Card>
       ))}
     </div>

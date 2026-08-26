@@ -1,0 +1,31 @@
+---
+/**
+ * PullQuote — brutalist quote block with thick 8px solid accent bar and monospace attribution.
+ * @prop {string} [quote] - Quote text (falls back to the component slot).
+ * @prop {string} [author] - Attribution shown below the quote.
+ * @prop {'accent'|'muted'} [variant] - Border emphasis (default accent).
+ */
+export interface Props {
+  quote?: string;
+  author?: string;
+  variant?: 'accent' | 'muted';
+}
+
+const { quote, author, variant = 'accent' } = Astro.props;
+
+const borderStyles = {
+  accent: 'border-[#ff2d2d] bg-[#ff2d2d]/5',
+  muted: 'border-white bg-white/5',
+};
+---
+
+<blockquote class={`my-10 border-l-8 pl-6 sm:pl-8 pr-4 py-3 ${borderStyles[variant]}`}>
+  <p class="text-2xl sm:text-3xl font-serif italic text-white leading-snug tracking-tight">
+    "{quote ? quote : <slot />}"
+  </p>
+  {author && (
+    <footer class="mt-4 text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">
+      // {author}
+    </footer>
+  )}
+</blockquote>

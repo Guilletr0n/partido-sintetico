@@ -8,16 +8,16 @@ export interface Props {
 
 const { variant = 'primary', size = 'md', href, className = '' } = Astro.props;
 
-const baseStyles = "inline-flex items-center justify-center font-medium rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-950";
+const baseStyles = "inline-flex items-center justify-center font-mono font-bold uppercase tracking-wider rounded-none transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black cursor-pointer select-none";
 const variantStyles = {
-  primary: "bg-emerald-500 text-zinc-950 hover:bg-emerald-400 font-semibold focus:ring-emerald-400 shadow-sm shadow-emerald-950/50",
-  secondary: "bg-zinc-100 text-zinc-950 hover:bg-white font-semibold focus:ring-zinc-300",
-  outline: "border border-zinc-800 bg-zinc-900/60 text-zinc-200 hover:bg-zinc-800 hover:text-white hover:border-zinc-700 focus:ring-zinc-600",
+  primary: "bg-[#ff2d2d] text-black border-2 border-[#ff2d2d] hover:bg-white hover:text-black hover:border-white shadow-[3px_3px_0px_0px_#ffffff] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none focus:ring-[#ff2d2d]",
+  secondary: "bg-white text-black border-2 border-white hover:bg-transparent hover:text-white shadow-[3px_3px_0px_0px_#ff2d2d] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none focus:ring-white",
+  outline: "border-2 border-zinc-400 bg-transparent text-white hover:border-white hover:bg-white hover:text-black shadow-[3px_3px_0px_0px_#3f3f46] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none focus:ring-white",
 };
 const sizeStyles = {
   sm: "px-3 py-1.5 text-xs",
-  md: "px-4 py-2 text-sm",
-  lg: "px-6 py-2.5 text-base font-semibold",
+  md: "px-5 py-2.5 text-sm",
+  lg: "px-7 py-3.5 text-base font-black",
 };
 
 const combinedClass = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;

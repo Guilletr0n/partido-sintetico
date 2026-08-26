@@ -1,0 +1,21 @@
+---
+/**
+ * KeyFact — raw data point container (gigantic monospace value + uppercase label + caption) for evidence articles.
+ * @prop {string} value - Large display value (number or short string).
+ * @prop {string} [label] - Short label under the value.
+ * @prop {string} [caption] - Optional supporting sentence.
+ */
+export interface Props {
+  value: string;
+  label?: string;
+  caption?: string;
+}
+
+const { value, label, caption } = Astro.props;
+---
+
+<div class="bg-[#0d0d0d] border-2 border-white rounded-none p-6 max-w-sm shadow-[4px_4px_0px_0px_#ff2d2d]">
+  <div class="text-5xl sm:text-6xl font-black font-mono text-[#00ff66] tracking-tighter leading-none">{value}</div>
+  {label && <div class="mt-3 text-xs font-mono font-bold uppercase tracking-wider text-white">{label}</div>}
+  {caption && <div class="mt-2 text-xs text-zinc-400 leading-relaxed font-sans">{caption}</div>}
+</div>

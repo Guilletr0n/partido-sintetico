@@ -1,7 +1,15 @@
 export * from './tokens/index.js';
 export * from './specs/index.js';
+export { default as ArticleHeader } from './components/ArticleHeader.astro';
+export { default as Badge } from './components/Badge.astro';
 export { default as Button } from './components/Button.astro';
+export { default as Callout } from './components/Callout.astro';
 export { default as Card } from './components/Card.astro';
-export { default as Header } from './components/Header.astro';
+export { default as Divider } from './components/Divider.astro';
 export { default as Footer } from './components/Footer.astro';
+export { default as Header } from './components/Header.astro';
 export { default as Hero } from './components/Hero.astro';
+export { default as KeyFact } from './components/KeyFact.astro';
+export { default as Lead } from './components/Lead.astro';
+export { default as PullQuote } from './components/PullQuote.astro';
+export { default as SectionTitle } from './components/SectionTitle.astro';

@@ -7,64 +7,68 @@ const specList = Object.values(componentSpecs);
 ---
 
 <ShowcaseLayout title="Overview & Specifications">
-  <div class="max-w-5xl space-y-8">
-    <div>
-      <h1 class="text-3xl font-extrabold text-white">Design System Specifications & Workbench</h1>
-      <p class="text-slate-400 mt-2 text-base">
-        Isolated preview environment operating independently of the main CMS application. Built from visual token definitions provided by the <code class="text-blue-400 bg-slate-800 px-1.5 py-0.5 rounded">design-spec-agent</code>.
+  <div class="max-w-5xl space-y-12">
+    <div class="border-b-2 border-zinc-800 pb-6">
+      <div class="flex items-center space-x-2 mb-2">
+        <span class="w-3 h-3 bg-[#ff2d2d]"></span>
+        <span class="font-mono text-xs font-bold text-[#ff2d2d] uppercase tracking-widest">// REGISTRO DE ESPECIFICACIONES</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-black uppercase text-white tracking-tight">Design System Workbench</h1>
+      <p class="text-zinc-400 mt-2 text-sm font-sans">
+        Isolated preview environment operating independently of the main CMS application.
       </p>
     </div>
 
     <!-- Quick Stats -->
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-      <div class="bg-slate-800/80 border border-slate-700 p-6 rounded-xl">
-        <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Design Tokens</div>
-        <div class="text-3xl font-extrabold text-blue-400 mt-2">{Object.keys(tokens.colors).length} Colors</div>
-        <div class="text-xs text-slate-400 mt-1">Palette scales & themes</div>
+      <div class="bg-[#0d0d0d] border-2 border-zinc-800 p-6 shadow-[3px_3px_0px_0px_#ffffff]">
+        <div class="text-xs font-mono text-zinc-400 font-bold uppercase tracking-wider">// TOKENS</div>
+        <div class="text-3xl font-black font-mono text-white mt-2">{Object.keys(tokens.colors).length} Colors</div>
+        <div class="text-xs font-mono text-zinc-500 mt-1">BRUTALIST PALETTE</div>
       </div>
-      <div class="bg-slate-800/80 border border-slate-700 p-6 rounded-xl">
-        <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider">UI Components</div>
-        <div class="text-3xl font-extrabold text-emerald-400 mt-2">{specList.length} Components</div>
-        <div class="text-xs text-slate-400 mt-1">Atoms, Molecules, Organisms</div>
+      <div class="bg-[#0d0d0d] border-2 border-zinc-800 p-6 shadow-[3px_3px_0px_0px_#ff2d2d]">
+        <div class="text-xs font-mono text-zinc-400 font-bold uppercase tracking-wider">// COMPONENTS</div>
+        <div class="text-3xl font-black font-mono text-[#ff2d2d] mt-2">{specList.length} UI Units</div>
+        <div class="text-xs font-mono text-zinc-500 mt-1">ATOMS · MOLECULES · ORGANISMS</div>
       </div>
-      <div class="bg-slate-800/80 border border-slate-700 p-6 rounded-xl">
-        <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Showcase URL</div>
-        <div class="text-2xl font-mono text-purple-300 mt-2">port 4322</div>
-        <div class="text-xs text-slate-400 mt-1">http://localhost:4322</div>
+      <div class="bg-[#0d0d0d] border-2 border-zinc-800 p-6 shadow-[3px_3px_0px_0px_#00ff66]">
+        <div class="text-xs font-mono text-zinc-400 font-bold uppercase tracking-wider">// WORKBENCH PORT</div>
+        <div class="text-3xl font-black font-mono text-[#00ff66] mt-2">PORT 4322</div>
+        <div class="text-xs font-mono text-zinc-500 mt-1">HTTP://LOCALHOST:4322</div>
       </div>
     </div>
 
     <!-- Component Spec Registry Table -->
-    <div class="bg-slate-800/60 border border-slate-700 rounded-xl overflow-hidden">
-      <div class="px-6 py-4 border-b border-slate-700 flex justify-between items-center">
-        <h2 class="text-lg font-bold text-white">Component Specification Registry</h2>
-        <span class="text-xs text-slate-400">Maintained by Design Spec Agent</span>
+    <div class="bg-[#0d0d0d] border-2 border-zinc-800">
+      <div class="px-6 py-4 border-b-2 border-zinc-800 flex justify-between items-center bg-black">
+        <h2 class="text-base font-mono font-bold uppercase text-white">// SPECIFICATION REGISTRY</h2>
+        <span class="text-xs font-mono text-zinc-500 uppercase">PSE DESIGN SPEC</span>
       </div>
       <table class="w-full text-left border-collapse">
         <thead>
-          <tr class="bg-slate-950/60 text-slate-400 text-xs uppercase tracking-wider border-b border-slate-700">
-            <th class="py-3 px-6">Component</th>
-            <th class="py-3 px-6">Category</th>
-            <th class="py-3 px-6">Description</th>
-            <th class="py-3 px-6 text-right">Workbench</th>
+          <tr class="bg-[#141414] text-zinc-400 text-xs font-mono uppercase tracking-wider border-b-2 border-zinc-800">
+            <th class="py-3 px-6">COMPONENT</th>
+            <th class="py-3 px-6">CATEGORY</th>
+            <th class="py-3 px-6">DESCRIPTION</th>
+            <th class="py-3 px-6 text-right">WORKBENCH</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-slate-700/60 text-sm">
+        <tbody class="divide-y-2 divide-zinc-800/80 text-sm">
           {specList.map((spec) => (
-            <tr class="hover:bg-slate-800/40 transition-colors">
-              <td class="py-4 px-6 font-mono font-bold text-blue-400">{spec.name}</td>
+            <tr class="hover:bg-zinc-900/60 transition-colors">
+              <td class="py-4 px-6 font-mono font-bold text-white uppercase">[ {spec.name} ]</td>
               <td class="py-4 px-6">
-                <span class="inline-block px-2.5 py-0.5 text-xs font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-800/60 rounded-full uppercase">
+                <span class="inline-block px-2 py-0.5 text-xs font-mono font-bold text-[#00ff66] bg-black border border-[#00ff66] uppercase">
                   {spec.category}
                 </span>
               </td>
-              <td class="py-4 px-6 text-slate-300">{spec.description}</td>
+              <td class="py-4 px-6 text-zinc-300 font-sans text-xs">{spec.description}</td>
               <td class="py-4 px-6 text-right">
                 <a
                   href={`/components/${spec.name}`}
-                  class="inline-flex items-center px-3 py-1 text-xs font-medium text-white bg-blue-600 hover:bg-blue-500 rounded-md transition-colors"
+                  class="inline-flex items-center px-3 py-1 text-xs font-mono font-bold uppercase text-black bg-[#ff2d2d] hover:bg-white border border-[#ff2d2d] hover:border-white transition-colors"
                 >
-                  Preview &rarr;
+                  PREVIEW &rarr;
                 </a>
               </td>
             </tr>

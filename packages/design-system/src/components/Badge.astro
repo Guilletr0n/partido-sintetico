@@ -1,0 +1,23 @@
+---
+/**
+ * Badge — sharp monospace tag used as kicker, tag or category chip.
+ * @prop {string} text - Label content.
+ * @prop {'accent'|'neutral'|'outline'} variant - Visual emphasis.
+ */
+export interface Props {
+  text: string;
+  variant?: 'accent' | 'neutral' | 'outline';
+}
+
+const { text, variant = 'accent' } = Astro.props;
+
+const variantStyles = {
+  accent: 'text-[#ff2d2d] border-[#ff2d2d] bg-[#ff2d2d]/10',
+  neutral: 'text-zinc-300 border-zinc-700 bg-zinc-900',
+  outline: 'text-white border-white bg-transparent',
+};
+---
+
+<span class={`inline-block px-2.5 py-1 text-xs font-mono font-bold uppercase tracking-wider rounded-none border ${variantStyles[variant]}`}>
+  [ {text} ]
+</span>

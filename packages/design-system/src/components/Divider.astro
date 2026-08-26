@@ -1,0 +1,28 @@
+---
+/**
+ * Divider — stark brutalist thematic break for articles with optional monospace technical tag.
+ * @prop {string} [label] - Optional text centered between the rules.
+ */
+export interface Props {
+  label?: string;
+}
+
+const { label } = Astro.props;
+---
+
+{
+  label ? (
+    <div class="relative flex items-center justify-center my-12">
+      <div class="absolute inset-0 flex items-center" aria-hidden="true">
+        <div class="w-full border-t-2 border-zinc-800" />
+      </div>
+      <div class="relative bg-black px-4 py-1 border-2 border-zinc-800">
+        <span class="text-xs font-mono font-bold uppercase tracking-widest text-zinc-300">
+          // {label} //
+        </span>
+      </div>
+    </div>
+  ) : (
+    <hr class="my-12 border-t-2 border-zinc-800" />
+  )
+}

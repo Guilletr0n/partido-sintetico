@@ -111,6 +111,13 @@ This repository includes custom agent configurations in `.agents/`:
 
 ---
 
+## ☁️ Deployment
+
+For terminal deployment to **Cloudflare Pages** via Wrangler CLI:
+- 📖 See [Cloudflare Deployment Guide](docs/CLOUDFLARE_DEPLOYMENT.md).
+
+---
+
 ## 📄 License
 
 Private repository for Partido Sintético Español.

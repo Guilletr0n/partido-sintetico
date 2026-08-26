@@ -7,6 +7,7 @@ dist/
 .astro/
 .output/
 *.log
+.wrangler/
 
 # Environment & local OS files
 .env

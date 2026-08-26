@@ -1,6 +1,8 @@
 ---
 import Header from '@repo/design-system/components/Header.astro';
 import Footer from '@repo/design-system/components/Footer.astro';
+import logoImage from '../../../design-system-docs/sources/images/logo-256x128.png';
+import logo128Image from '../../../design-system-docs/sources/images/logo-128x64-bg-black.png';
 
 export interface Props {
   title: string;
@@ -23,12 +25,43 @@ const navItems = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <title>{title} | Partido Sintético Español</title>
+
+    <!-- Google Fonts for Brutalist Web Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700;800&family=Space+Grotesk:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body class="bg-zinc-950 text-zinc-100 min-h-screen flex flex-col antialiased">
-    <Header siteTitle="Partido Sintético Español" navItems={navItems} />
+  <body class="bg-black text-white min-h-screen flex flex-col font-sans antialiased selection:bg-[#ffe600] selection:text-black">
+    <Header siteTitle="Partido Sintético Español" logoSrc={logo128Image.src} navItems={navItems} />
     <main class="flex-grow">
       <slot />
     </main>
     <Footer copyright="© 2026 Partido Sintético Español. Plataforma Abierta de Inteligencia Colectiva." />
   </body>
 </html>
+
+<style is:global>
+  :root {
+    --font-sans: 'Space Grotesk', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-serif: 'Instrument Serif', Georgia, serif;
+  }
+  body {
+    font-family: var(--font-sans);
+    background-color: #000000;
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 32px 32px;
+    background-position: center center;
+  }
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
+  }
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+</style>

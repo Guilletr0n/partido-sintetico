@@ -1,0 +1,44 @@
+---
+/**
+ * Callout — brutalist editorial note box with solid border and uppercase monospace tag.
+ * @prop {'info'|'success'|'warning'} [variant] - Semantic emphasis (default info).
+ * @prop {string} [title] - Overrides the default variant label.
+ */
+export interface Props {
+  variant?: 'info' | 'success' | 'warning';
+  title?: string;
+}
+
+const { variant = 'info', title } = Astro.props;
+
+const variantStyles = {
+  info: {
+    border: 'border-white',
+    badge: 'bg-white text-black',
+    defaultLabel: '§ INFORMACIÓN',
+  },
+  success: {
+    border: 'border-[#00ff66]',
+    badge: 'bg-[#00ff66] text-black',
+    defaultLabel: '§ EVIDENCIA AUDITADA',
+  },
+  warning: {
+    border: 'border-[#ffe600]',
+    badge: 'bg-[#ffe600] text-black',
+    defaultLabel: '§ INCERTIDUMBRE / LÍMITE',
+  },
+};
+
+const styles = variantStyles[variant];
+---
+
+<aside class={`border-2 ${styles.border} bg-[#0d0d0d] p-5 space-y-3 rounded-none`}>
+  <div>
+    <span class={`inline-block px-2.5 py-0.5 text-xs font-mono font-black uppercase tracking-wider ${styles.badge}`}>
+      [ {title ?? styles.defaultLabel} ]
+    </span>
+  </div>
+  <div class="text-sm text-zinc-200 leading-relaxed font-sans">
+    <slot />
+  </div>
+</aside>

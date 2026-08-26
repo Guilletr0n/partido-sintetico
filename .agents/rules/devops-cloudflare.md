@@ -9,6 +9,10 @@ Find manuals about deploying an astro site in "https://developers.cloudflare.com
 
 When configuring deployments or infrastructure in `apps/cms` or `apps/design-system-docs`:
 
+0. **No Automatic Deploy, Commit or Build**:
+   - Never deploy, commit or run check/build unless the user explicitly asks for it.
+   - Deployment runs only when requested; the default for any change is the local dev server (hot reload) — no build/check unless deploying.
+   - Keep changes uncommitted and unreleased until the user says otherwise.
 1. **Security & Environment Variables**:
    - Never commit sensitive API tokens or secrets (`CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`) to version control.
    - Use `.env.example` for public template keys and `.env` for local secrets. `.env` MUST be listed in `.gitignore`.

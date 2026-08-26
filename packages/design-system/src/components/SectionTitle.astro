@@ -1,0 +1,39 @@
+---
+/**
+ * SectionTitle — brutalist heading with monospace kicker, anchor id and alignment.
+ * @prop {string} title - Heading text.
+ * @prop {string} [kicker] - Small uppercase label above the heading.
+ * @prop {'h2'|'h3'|'h4'} [as] - Heading level (default h2).
+ * @prop {string} [id] - Anchor id for deep links.
+ * @prop {'left'|'center'} [align] - Text alignment (default left).
+ */
+export interface Props {
+  title: string;
+  kicker?: string;
+  as?: 'h2' | 'h3' | 'h4';
+  id?: string;
+  align?: 'left' | 'center';
+}
+
+const { title, kicker, as = 'h2', id, align = 'left' } = Astro.props;
+
+const headingLevel = (as === 'h3' ? 'h3' : as === 'h4' ? 'h4' : 'h2') as 'h2' | 'h3' | 'h4';
+const Tag = headingLevel;
+
+const headingStyles = {
+  h2: 'text-2xl sm:text-4xl md:text-5xl font-black uppercase text-white tracking-tight leading-none',
+  h3: 'text-xl sm:text-2xl md:text-3xl font-black uppercase text-white tracking-tight leading-snug',
+  h4: 'text-lg sm:text-xl font-bold uppercase text-zinc-200 tracking-tight',
+};
+---
+
+<div class={`space-y-3 ${align === 'center' ? 'text-center' : ''}`}>
+  {kicker && (
+    <div class={`flex items-center gap-2 ${align === 'center' ? 'justify-center' : ''}`}>
+      <span class="w-2 h-2 bg-[#ff2d2d]"></span>
+      <p class="text-xs font-mono font-bold text-[#ff2d2d] uppercase tracking-widest">{kicker}</p>
+    </div>
+  )}
+  <Tag id={id} class={headingStyles[headingLevel]}>{title}</Tag>
+  <slot />
+</div>

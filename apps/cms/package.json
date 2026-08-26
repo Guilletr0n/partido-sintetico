@@ -10,6 +10,7 @@
     "check": "astro check"
   },
   "dependencies": {
+    "@astrojs/mdx": "^3.0.0",
     "@astrojs/tailwind": "^5.1.0",
     "@repo/design-system": "workspace:*",
     "astro": "^4.15.0",

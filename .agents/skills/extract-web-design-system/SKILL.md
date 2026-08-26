@@ -1,6 +1,6 @@
 ---
 name: extract-web-design-system
-description: Instructs the agent to visit a target website (default: https://www.langchain.com), extract its visual styles, color tokens, typography scales, and component aesthetics, and update the project's design system tokens and component styling. Enforces forced dark mode and light text regardless of user OS preferences.
+description: "Instructs the agent to visit a target website (default: https://www.langchain.com), extract its visual styles, color tokens, typography scales, and component aesthetics, and update the project's design system tokens and component styling. Enforces forced dark mode and light text regardless of user OS preferences."
 ---
 
 # Extract Web Design System Skill

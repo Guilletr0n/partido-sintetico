@@ -1,7 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleHeader from '@repo/design-system/components/ArticleHeader.astro';
 import Button from '@repo/design-system/components/Button.astro';
+import Card from '@repo/design-system/components/Card.astro';
+import SectionTitle from '@repo/design-system/components/SectionTitle.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
@@ -13,34 +16,132 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await post.render();
+
+const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+const related = allPosts
+  .filter((p) => p.slug !== post.slug)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 2);
+const formattedDate = post.data.pubDate.toLocaleDateString('es-ES', { dateStyle: 'long' });
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description}>
-  <article class="max-w-3xl mx-auto px-4 py-16">
-    <div class="mb-8">
-      <Button href="/" variant="outline" size="sm">&larr; Volver al inicio</Button>
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 py-16">
+    <div class="mb-10">
+      <Button href="/" variant="outline" size="sm">&larr; VOLVER AL INICIO</Button>
     </div>
 
-    <header class="mb-10 border-b border-zinc-800 pb-8">
-      {post.data.tag && (
-        <span class="inline-block px-3 py-1 mb-4 text-xs font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-800/60 rounded-full">
-          {post.data.tag}
-        </span>
-      )}
-      <h1 class="text-4xl font-extrabold text-zinc-100 mb-4 tracking-tight">
-        {post.data.title}
-      </h1>
-      <p class="text-xl text-zinc-400 mb-4">{post.data.description}</p>
-      <div class="text-sm text-zinc-400">
-        <span>Por <strong class="text-zinc-200">{post.data.author}</strong></span> • 
-        <time datetime={post.data.pubDate.toISOString()}>
-          {post.data.pubDate.toLocaleDateString('es-ES', { dateStyle: 'long' })}
-        </time>
-      </div>
-    </header>
+    <ArticleHeader
+      kicker={post.data.tag}
+      title={post.data.title}
+      description={post.data.description}
+      author={post.data.author}
+      date={formattedDate}
+    />
 
-    <div class="prose prose-invert max-w-none text-zinc-300 space-y-6">
+    <div class="article-prose mt-12">
       <Content />
     </div>
+
+    <section class="mt-20 pt-10 border-t-2 border-zinc-800">
+      <div class="mb-8">
+        <SectionTitle kicker="CONTINUAR LECTURA" title="OTROS ARTÍCULOS" />
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {related.map((p) => (
+          <Card
+            title={p.data.title}
+            subtitle={p.data.description}
+            tag={p.data.tag}
+            href={`/posts/${p.slug}`}
+          />
+        ))}
+      </div>
+    </section>
   </article>
 </BaseLayout>
+
+<style is:global>
+  /* Brutalist typography for rendered markdown content */
+  .article-prose {
+    color: #e4e4e7; /* zinc-200 */
+    font-size: 1.125rem;
+    line-height: 1.8;
+  }
+  .article-prose h2 {
+    font-family: var(--font-sans);
+    font-size: 2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    margin-top: 3rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 2px solid #27272a;
+    padding-bottom: 0.5rem;
+  }
+  .article-prose h3 {
+    font-family: var(--font-sans);
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: #ffffff;
+    margin-top: 2.25rem;
+    margin-bottom: 1rem;
+  }
+  .article-prose p {
+    margin: 1.5rem 0;
+  }
+  .article-prose strong {
+    color: #ffffff;
+    font-weight: 800;
+  }
+  .article-prose a {
+    color: #ff2d2d;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 600;
+  }
+  .article-prose a:hover {
+    color: #ffffff;
+    background-color: #ff2d2d;
+  }
+  .article-prose code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background-color: #141414;
+    border: 1px solid #3f3f46;
+    padding: 0.2em 0.4em;
+    color: #00ff66;
+  }
+  .article-prose ul,
+  .article-prose ol {
+    margin: 1.5rem 0;
+    padding-left: 1.75rem;
+  }
+  .article-prose ul {
+    list-style: square;
+  }
+  .article-prose ol {
+    list-style: decimal;
+  }
+  .article-prose li {
+    margin: 0.75rem 0;
+  }
+  .article-prose blockquote {
+    margin: 2.5rem 0;
+    border-left: 6px solid #ff2d2d;
+    background-color: #0d0d0d;
+    padding: 1.25rem 1.75rem;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.35rem;
+    color: #ffffff;
+  }
+  .article-prose hr {
+    margin: 3rem 0;
+    border: 0;
+    border-top: 2px solid #27272a;
+  }
+</style>

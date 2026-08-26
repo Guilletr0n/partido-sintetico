@@ -7,6 +7,9 @@ description: Comprehensive guide teaching the agent how to use Cloudflare CLI (W
 
 This skill provides complete operational knowledge for the **DevOps Agent** (`devops-deploy-agent`) to interact with Cloudflare CLI (`bunx wrangler`), Cloudflare Pages, Cloudflare Workers, and environment secrets for deploying applications in this monorepo.
 
+> [!IMPORTANT]
+> **Deploy ONLY when explicitly requested.** Run the deployment commands exclusively when the user asks to deploy. Never deploy or `git commit` as part of any other task. The default for any change is the local dev server with hot reload — no build/check needed unless deploying (`bun run dev` → http://localhost:4321, `bun run dev:docs` → http://localhost:4322).
+
 ---
 
 ## 🔑 Environment Credentials & API Key Loading
